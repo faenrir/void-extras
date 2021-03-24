@@ -1,0 +1,23 @@
+# Template file for 'xd-torrent'
+pkgname=xd-torrent
+version=0.3.4
+revision=1
+archs="x86_64"
+wrksrc="XD-${version}"
+build_style=gnu-makefile
+hostmakedepends="go which"
+short_desc="I2P BitTorrent Client written in GO"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="MIT"
+homepage="https://github.com/majestrate/XD"
+distfiles="https://github.com/majestrate/XD/archive/v${version}.tar.gz"
+checksum=90a3df7a52ec30effe4a287728c1fd2d93a3a08b59cd2c6a971513d487d9d48a
+nopie=yes
+
+do_install() {
+	vbin XD
+	vinstall XD-cli 644 usr/bin
+	vinstall "${FILESDIR}/xd.conf" 644 etc/xd
+
+	vlicense LICENSE
+}

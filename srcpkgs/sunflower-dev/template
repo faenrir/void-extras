@@ -1,0 +1,21 @@
+# Template file for 'sunflower-dev'
+pkgname=sunflower-dev
+version=0.4
+revision=1
+_version_append_revision="-62"
+wrksrc="Sunflower-develop"
+build_style=python3-module
+make_install_args="--optimize=1 --skip-build"
+hostmakedepends="libnotify python3-setuptools python3-gobject gtk+3-devel python3-chardet"
+makedepends="vte3-devel"
+depends="gtk+3 vte3 python3-gobject python3-chardet librsvg"
+short_desc="Small, customizable dual-panel file manager with support for plugins"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://sunflower-fm.org"
+distfiles="https://github.com/MeanEYE/Sunflower/archive/develop.tar.gz"
+checksum=@1316d6ead4a2c6a01d51afdb64dd1b650fa1ff29c7ed379d3facef14b11b43d0
+patch_args="-Np1"
+python_version=3
+# Just in case "sunflower" package is accepted to repo and installed, we don't want both to be installed
+conflicts="sunflower"

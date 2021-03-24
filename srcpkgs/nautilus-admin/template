@@ -1,0 +1,13 @@
+# Template file for 'nautilus-admin'
+pkgname=nautilus-admin
+version=1.1.9
+revision=1
+build_style=cmake
+makedepends="gettext"
+depends="nautilus-python"
+short_desc="Extension for Nautilus to do administrative operations"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/brunonova/nautilus-admin"
+distfiles="${homepage}/archive/v${version}.tar.gz"
+checksum=12a36d1298fbe4065e0dba8f1a48312950fe116a503a4c44a7547d0fb322bc1a

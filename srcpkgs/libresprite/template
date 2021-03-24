@@ -1,0 +1,22 @@
+# Template file for 'libresprite'
+pkgname=libresprite
+version=1.0
+revision=1
+build_style=cmake
+hostmakedepends=""
+makedepends="libX11-devel libXcursor-devel ninja"
+depends=""
+wrksrc="LibreSprite-continuous"
+short_desc="LibreSprite is a free and open source program for creating and animating your sprites."
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="GPL-3.0-or-later"
+homepage="http://www.libresprite.org/"
+distfiles="https://github.com/LibreSprite/LibreSprite/archive/continuous.tar.gz"
+checksum=5e93ea2050be36689ae2e9eadfe1c56c107a2600aad36e86428878581c63edbc
+
+do_build() {
+        mkdir -p build && cd build
+        git submodule update --init --recursive
+        cmake -G Ninja ..
+        ninja libresprite
+}

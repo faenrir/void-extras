@@ -1,0 +1,24 @@
+# Template file for 'xzoom-follow-mouse'
+pkgname=xzoom-follow-mouse
+version=1
+revision=1
+hostmakedepends="imake"
+makedepends="libXt-devel libXext-devel"
+short_desc="Fork of the xzoom program with a follow mouse feature."
+maintainer="Fabian Baldeau <fabian.baldeau@protonmail.com>"
+license="Custom"
+homepage="https://github.com/mbarakatt/xzoom-follow-mouse"
+distfiles="${homepage}/archive/master.tar.gz"
+checksum=dac10d286cec2d158e6d0bca03fa2c7d06fe032cd76b38e728d4fb3fd650421b
+wrksrc="${pkgname}-master"
+
+do_build() {
+	CC=cc xmkmf
+	sed -i "s@-O2@$CFLAGS@" ./Makefile
+	make CC=$CC CDEBUGFLAGS="${CFLAGS}" EXTRA_LDOPTIONS="${LDFLAGS}"
+}
+
+do_install() {
+	make MANSUFFIX=1 DESTDIR=${DESTDIR} install install.man
+	vlicense ${FILESDIR}/COPYING
+}

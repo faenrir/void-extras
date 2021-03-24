@@ -1,0 +1,19 @@
+# Template file for 'joypixels-ttf'
+pkgname=joypixels-ttf
+version=6.0.0
+revision=1
+archs=noarch
+wrksrc="joypixels-ttf"
+depends="font-util"
+short_desc="Emoji as a Service (formerly EmojiOne)"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="custom"
+homepage="https://www.joypixels.com/download"
+distfiles="https://cdn.joypixels.com/arch-linux/font/${version}/joypixels-android.ttf"
+checksum=ba9c5563beb5bbaaa7185dfb1dac58b13a50d9cdf4901cc0f592bc9134d6b8ef
+
+font_dirs="/usr/share/fonts/twemoji"
+
+do_install() {
+	vcopy joypixels-android.ttf ${DESTDIR}/usr/share/fonts/twemoji/JoyPixels.ttf
+}

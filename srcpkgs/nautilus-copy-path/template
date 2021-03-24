@@ -1,0 +1,17 @@
+# Template file for 'nautilus-copy-path'
+pkgname=nautilus-copy-path
+version=1.2.4
+revision=1
+build_style=gnu-makefile
+depends="nautilus-python"
+wrksrc="${pkgname}-${version}"
+short_desc="Extension for Nautilus to copy files/dir path or name"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="MIT"
+homepage="https://github.com/chr314/nautilus-copy-path"
+distfiles="${homepage}/archive/${version}.tar.gz"
+checksum=48b93c51c6d2f106a83c48a744d3a4856bf27f46f6359b49ffc0d5972874dd1c
+
+post_install() {
+        vlicense LICENSE
+}

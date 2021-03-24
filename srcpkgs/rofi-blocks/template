@@ -1,0 +1,23 @@
+# Template file for 'rofi-blocks'
+pkgname=rofi-blocks
+version=1
+revision=1
+build_style=gnu-configure
+hostmakedepends="autoconf automake libtool pkg-config json-glib-devel"
+makedepends="rofi-devel json-glib-devel"
+depends="rofi jq"
+short_desc="rofi modi for controlling rofi content through communication with an external program"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/OmarCastro/rofi-blocks"
+distfiles="https://github.com/OmarCastro/rofi-blocks/archive/master.tar.gz"
+checksum=ebf5346e75b3b0684399b19336805eaa968d6ddb0e329de68bfad06759e03ce0
+wrksrc="rofi-blocks-master"
+
+pre_configure() {
+    autoreconf -i
+}
+
+post_install() {
+	vlicense LICENSE
+}

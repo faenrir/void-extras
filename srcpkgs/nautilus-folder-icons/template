@@ -1,0 +1,13 @@
+# Template file for 'nautilus-folder-icons'
+pkgname=nautilus-folder-icons
+version=3.0
+revision=1
+build_style=meson
+depends="nautilus-python"
+makedepends="appstream-glib-devel"
+short_desc="Nautilus/Nemo extension that makes changing folders icons easy!"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/bilelmoussaoui/nautilus-folder-icons"
+distfiles="${homepage}/archive/${version}.tar.gz"
+checksum=25fa6f164f50ed84ee6fa6d7a6004cb5190051847a5c3895f41bf1b426ad2565
