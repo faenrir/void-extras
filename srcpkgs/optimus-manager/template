@@ -1,0 +1,56 @@
+# Template file for 'optimus-manager'
+# Originally created by Askannz, ported to Void by Hyper-KVM
+_desc="Utility to handle GPU switching for Optimus laptops"
+pkgname=optimus-manager
+version=1.3.1
+revision=2
+archs="x86_64"
+build_style=python3-module
+makedepends="python3 python3-setuptools pciutils"
+depends="elogind mesa-demos xrandr python3-dbus python3-psutil"
+short_desc="${_desc}"
+maintainer="Hyper-KVM <hyperkvmx86@gmail.com>"
+license="MIT"
+homepage="https://github.com/Askannz/optimus-manager"
+distfiles="https://github.com/Hyper-KVM/optimus-manager/archive/v${version}.tar.gz"
+checksum="c3dd1b42cc9dcb94f47b6a59802b95bda51e590445a844dc00026bfa8e4ffd56"
+tags="python"
+
+do_build() {
+	python3 setup.py install
+}
+
+post_install() {
+	vinstall modules/optimus-manager.conf 644 usr/lib/modprobe.d/
+	vinstall runit/optimus-manager/finish 755 etc/sv/optimus-manager
+	vinstall runit/optimus-manager/run 755 etc/sv/optimus-manager
+	vinstall optimus-manager.conf 644 usr/share/
+	vinstall login_managers/sddm/20-optimus-manager.conf 644 etc/sddm.conf.d/
+	vinstall login_managers/lightdm/20-optimus-manager.conf 644 etc/lightdm/lightdm.conf.d/
+	vinstall config/xorg-integrated-gpu.conf 644 etc/optimus-manager/
+	vinstall config/xorg-nvidia-gpu.conf 644 etc/optimus-manager/
+	vinstall config/xsetup-integrated.sh 755 etc/optimus-manager/
+	vinstall config/xsetup-nvidia.sh 755 etc/optimus-manager/
+	vinstall config/xsetup-hybrid.sh 755 etc/optimus-manager/
+	vinstall config/nvidia-enable.sh 755 etc/optimus-manager/
+	vinstall config/nvidia-disable.sh 755 etc/optimus-manager/
+	vlicense LICENSE
+}
+
+optimus-manager-lightdm_package() {
+	short_desc="${_desc} - lightdm script"
+	conflicts="optimus-manager-xinit optimus-manager-sddm"
+	pkg_install() {
+		vinstall runit/displaymanager/optimus-manager/run 755 etc/sv/optimus-manager
+		vinstall runit/displaymanager/lightdm/run 755 /etc/sv/optimus-manager-lightdm
+	}
+}
+
+optimus-manager-sddm_package() {
+	short_desc="${_desc} - sddm script"
+	conflicts="optimus-manager-xinit optimus-manager-lightdm"
+	pkg_install() {
+		vinstall runit/displaymanager/optimus-manager/run 755 etc/sv/optimus-manager
+		vinstall runit/displaymanager/sddm/run 755 etc/sv/optimus-manager-sddm
+	}
+}
