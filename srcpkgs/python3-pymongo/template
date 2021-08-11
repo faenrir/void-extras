@@ -1,0 +1,14 @@
+# Template file for 'python3-pymongo'
+pkgname=python3-pymongo
+revision=1
+version=3.12.0
+wrksrc=pymongo-${version}
+archs="amd64 arm64 x86_64"
+build_style=python3-module
+hostmakedepends="python-setuptools"
+short_desc="Python module for using MongoDB"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="APACHE"
+homepage="https://pypi.python.org/pypi/pymongo/"
+distfiles="https://pypi.io/packages/source/p/pymongo/pymongo-${version}.tar.gz"
+checksum=b88d1742159bc93a078733f9789f563cef26f5e370eba810476a71aa98e5fbc2

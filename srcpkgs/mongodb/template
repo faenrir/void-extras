@@ -1,0 +1,46 @@
+# Template file for 'mongodb'
+pkgname=mongodb
+version=4.2.12
+revision=1
+archs="arm64 x86_64"
+wrksrc="mongodb-src-r${version}"
+hostmakedepends="python3-setuptools pkg-config scons"
+makedepends="libcurl-devel openssl-devel yaml-cpp-devel libsasl-devel snappy-devel pcre-devel libpcap-devel libzstd-devel liblzma-devel python3-devel python3-yaml python3-requests python3-pymongo python3-psutil python3-regex python3-cheetah3 python3-snowballstemmer"
+depends="cyrus-sasl-modules"
+short_desc="A high-performance, open source, schema-free document-oriented database"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="Apache-2.0 SSPL-1"
+homepage="https://www.${pkgname}.com"
+distfiles="https://fastdl.mongodb.org/src/${pkgname}-src-r${version}.tar.gz"
+checksum=79b0eee164d51b948bb65cf8f845a35db736d4e083b6be6695835c9dbb40549d
+_scons_args="
+ --disable-warnings-as-errors
+ --use-system-pcre
+ --use-system-snappy
+ --use-system-yaml
+ --use-system-zlib
+ --use-system-zstd
+ --use-sasl-client
+ --nostrip
+ --ssl
+"
+mongodb_homedir="/var/lib/mongodb"
+system_accounts="mongodb"
+make_dirs="
+ /var/lib/mongodb 0700 mongodb mongodb
+ /var/log/mongodb 0750 mongodb mongodb"
+conf_files="/etc/mongodb/mongodb.conf"
+
+do_build() {
+  MAKEFLAGS="${makejobs}" scons core ${makejobs} ${_scons_args}
+}
+
+do_install() {
+  for b in mongo mongos mongod; do
+    vman debian/${b}.1
+    vbin ${b}
+  done
+
+  vinstall ${FILESDIR}/mongodb.conf 644 etc/mongodb
+  vsv mongodb
+}
