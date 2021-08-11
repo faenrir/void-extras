@@ -1,0 +1,26 @@
+# Template file for 'rofi-file-browser'
+pkgname=rofi-file-browser-extended
+version=1.2.0
+revision=1
+short_desc="Use rofi to quickly open files"
+maintainer="baldeau fabian.baldeau@protonmail.com"
+archs="x86_64"
+license="MIT"
+make_install_args="PREFIX=/usr"
+homepage="https://github.com/marvinkreis/${pkgname}"
+distfiles="${homepage}/archive/${version}.tar.gz"
+hostmakedepends="pkg-config"
+makedepends="rofi-devel cmake"
+depends="rofi"
+checksum=4d70f546406d6434ce93cd8957f885e39b512a5dfc8fddb1a53faa4ffa75a8a6
+
+do_build() {
+  cmake .
+  make
+}
+
+do_install() {
+  make DESTDIR=$DESTDIR PREFIX=/usr/ install
+  vlicense LICENSE
+  vdoc doc/rofi-file-browser-extended.1
+}
