@@ -1,0 +1,20 @@
+# Template file for 'ncmpcpp-ueberzug'
+pkgname=ncmpcpp-ueberzug
+_commit=9bd9121d9ba0ac49106b34f792c3445a07643a19
+version=1.0.${_commit}
+revision=1
+wrksrc=${pkgname}-${_commit}
+depends="ncmpcpp ueberzug"
+short_desc="A ncmpcpp wrapper that enables cover art via ueberzug"
+maintainer="baldeau <fabian.baldeau@protonmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/tam-carre/${pkgname}"
+distfiles="${homepage}/archive/${_commit}.tar.gz"
+checksum=fb130d75631259241e5e670181358180921b3c8c07bdc32c8a98a5c98f9db2ab
+
+do_install() {
+  vbin ${pkgname}
+  vbin ncmpcpp_cover_art.sh ncmpcpp-cover-art
+  vdoc img/fallback.png
+  vlicense LICENSE
+}
